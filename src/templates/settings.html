@@ -1,0 +1,110 @@
+{% extends"navbar.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+{% block title %} Settings {% endblock %}
+{%block content%}
+{% if current_user.is_authenticated %}
+<div class="jumbotron text-center">
+    <h1>Settings</h1>
+    <p>Update your SmartHealth account.</p> 
+  </div>
+<div class=container>
+    <div class="row">
+        <a href=# onclick=OpenPw() style="color: black;">
+            {% if current_user.type != "patient" %}
+            <div class="col col-sm-12">
+                <h3>Update Password</h3>
+                <p>Update your password.</p>
+            </div>
+            {% else %}
+            <div class="col col-sm-4">
+                <h3>Update Password</h3>
+                <p>Update your password.</p>
+            </div>
+            {% endif %}
+        </a>
+        {% if current_user.type == "patient" %}
+        <a href=# onclick=OpenHeight() style="color: black;">
+            <div class="col col-sm-4">
+                <h3>Update Height</h3>
+                <p>Update your height.</p>
+            </div>
+        </a>
+        <a href=# onclick=OpenWeight() style="color: black;">
+            <div class="col col-sm-4">
+                <h3>Update Weight</h3>
+                <p>Update your weight.</p>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="form-popup" id="Weight" style="display: none;">
+    <form action="" class="form-container" method="post">
+        <div class="container settings">
+            <div class="form-group">
+                {{render_field(wform.weight, class_="form-control")}}
+            </div>
+            <center><button type="submit" class="btn btn-dark" id="sb" style="margin-bottom: 5px;">Submit</button></center>
+            <center><button type="close" class="btn btn-danger" onclick=closeWeight()>Close</button></center>
+        </div>
+    </form>
+</div>
+<div class="form-popup" id="Height" style="display: none;">
+    <form action="" class="form-container" method="post">
+        <div class="container settings">
+            <div class="form-group">
+                {{render_field(hform.height, class_="form-control")}}
+            </div>
+            <center><button type="submit" class="btn btn-dark" id="sb" style="margin-bottom: 5px;">Submit</button></center>
+            <center><button type="close" class="btn btn-danger" onclick=closeHeight()>Close</button></center>
+        </div>
+    </form>
+</div>
+{%endif%}
+<div class="form-popup" id="Password" style="display: none;">
+    <form action="" class="form-container" method="post">
+        <div class="container settings">
+            <div class="form-group">
+                {{render_field(pwform.old_password, class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{render_field(pwform.password, class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{render_field(pwform.confirm, class_="form-control")}}
+            </div>
+            <center><button type="submit" class="btn btn-dark" id="sb" style="margin-bottom: 5px;">Submit</button></center>
+            <center><button type="close" class="btn btn-danger" onclick=closePw()>Close</button></center>
+        </div>
+    </form>
+</div>
+<script>
+    function OpenWeight() {
+        document.getElementById("Weight").style.display = "block";
+        document.getElementById("Password").style.display = "none";
+        document.getElementById("Height").style.display = "none";
+    }
+
+    function closeWeight() {
+        document.getElementById("Weight").style.display = "none";
+    }
+    function OpenPw() {
+        document.getElementById("Password").style.display = "block";
+        document.getElementById("Weight").style.display = "none";
+        document.getElementById("Height").style.display = "none";
+    }
+
+    function closePw() {
+        document.getElementById("Password").style.display = "none";
+    }
+    function OpenHeight() {
+        document.getElementById("Height").style.display = "block";
+        document.getElementById("Password").style.display = "none";
+        document.getElementById("Weight").style.display = "none";
+    }
+
+    function closeHeight() {
+        document.getElementById("Height").style.display = "none";
+    }
+</script>
+{%endif%}
+{%endblock%}

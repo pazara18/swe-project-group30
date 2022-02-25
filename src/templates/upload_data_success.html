@@ -1,0 +1,58 @@
+{%extends "navbar.html"%}
+{%block title%}Upload Data{%endblock%}
+{%block content%}
+{% from "includes/_formhelpers.html" import render_field %}
+<div class="jumbotron text-center">
+    <h1>Upload Patient Data</h1>
+    <p>Fill all of the data fields</p>
+</div>
+<form method="post">
+    <div class="container data-container" style="padding:20px; background-color:whitesmoke;">
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    {{render_field(form.ldl, class_="form-control")}}
+                </div>
+                <div class="form-check">
+                    {{render_field(form.hdl, class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{render_field(form.triglycerides, class_="form-control")}}
+                </div>
+                <div class="form-check">
+                    {{render_field(form.hemoglobin, class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{render_field(form.sodium, class_="form-control")}}
+                </div>
+                <div class="form-check">
+                    {{render_field(form.systolic_bp, class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{render_field(form.diastolic_bp, class_="form-control")}}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                        {{render_field(form.heart_rate, class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{render_field(form.respiratory_rate, class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{render_field(form.pain_severity, class_="form-control")}}
+                </div>
+                <div class="form-check">
+                    {{render_field(form.smoking, class_="form-control")}}
+                </div>  
+                <div class="form-group">
+                        {{render_field(form.stress, class_="form-control")}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <center><button type="submit" class="btn btn-dark">Submit</button></center>
+</form>
+{%endblock%}

@@ -1,0 +1,46 @@
+{% extends"navbar.html" %}
+{% block title %} Welcome! {% endblock %}
+{%block content%}
+<div class="jumbotron text-center">
+  <h1>SmartHealth</h1>
+  <p>The easiest way to view your health status.</p> 
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col col-sm-4">
+      <h3>View Past Diagnosis</h3>
+      <p>From SmartHealth you can easily view all the diagnoses that were made for you.</p>
+    </div>
+    <div class="col col-sm-4">
+      <h3>View Past Data</h3>
+      <p>From SmartHealth you can view your FHIR Data.</p>
+    </div>
+    <div class="col col-sm-4">
+      <h3>Vital Signs</h3>
+      <p>With SmartHealth you can enter your own data such as your height or weight which will then be used to calculate your risk against hypertension.</p>
+    </div>
+  </div>
+  <div class="row" style="padding-bottom: 16px;">
+    <div class="col col-sm-4">
+      <h3>Model Predictions</h3>
+      <p>Using the power of Artificial Intelligence SmartHealth can make a guess on your hypertension.</p>
+    </div>
+    <div class="col col-sm-4">
+      <h3>Privacy</h3>
+      <p>Your personal health data is not shared with anyone but yourself and your doctors.</p>
+    </div>
+    <div class="col col-sm-4">
+      <h3>Right to be Forgotten</h3>
+      <p>You can delete your data and account from SmartHealth whenever you want to.</p>
+    </div>
+  </div>
+  <div class="row">
+    <center>
+      <button type="button" onclick="location.href = '{{ url_for('v_register') }}';" class="btn btn-lg btn-dark">Register Now</button>
+      <button type="button" onclick="location.href = '{{ url_for('v_login') }}';" class="btn btn-lg btn-dark">Login</button>
+    </center>
+    <!-- <center><button type="button" onclick="location.href = '{{ url_for('v_register') }}';" class="btn btn-link btn-lg" style="background-color: rgb(212, 212, 212); color: black;">Register Now</button></center> -->
+  </div>
+</div>
+{%endblock%}

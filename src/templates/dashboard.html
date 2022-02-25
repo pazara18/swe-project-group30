@@ -1,0 +1,110 @@
+{%extends "navbar.html"%}
+{%block title%} Dashboard {%endblock%}
+{%block content%}
+{% if current_user.is_authenticated %}
+
+<div class="jumbotron text-center">
+    <h1>Welcome</h1>
+    <p>{{current_user.name}} {{current_user.surname}}</p>
+</div>
+{% if current_user.type == "doctor" %}
+<div class=container>
+    <div class="row">
+        <a href="{{url_for('v_view_patient_data')}}" style="color: black;">
+            <div class="col col-sm-6">
+                <h3>View Patient Data</h3>
+                <p>View patients' data using their national ID.</p>
+            </div>
+        </a>
+        <a href="{{url_for('v_view_patient_diagnosis')}}" style="color: black;">
+            <div class="col col-sm-6">
+                <h3>View Patient Diagnosis</h3>
+                <p>View patients' diagnosis using their national ID.</p>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{url_for('v_upload_data')}}" style="color: black;">
+            <div class="col col-sm-6">
+                <h3>Upload Data</h3>
+                <p>From SmartHealth you can easily view all the diagnoses that were made for you.</p>
+            </div>
+        </a>
+        <a href="{{url_for('v_upload_diagnosis')}}" style="color: black;">
+            <div class="col col-sm-6">
+                <h3>Upload Diagnosis</h3>
+                <p>Make a diagnosis to a patient.</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+{% elif current_user.type == "patient" %}<div class="container">
+    <div class=container>
+        <div class="row">
+            <a href="{{url_for('v_view_last_data')}}" style="color: black;">
+                <div class="col col-sm-6">
+                    <h3>Your Latest Data</h3>
+                    <p>Latest FHIR Data</p>
+                </div>
+            </a>
+            <a href="{{url_for('v_settings')}}" style="color: black;">
+                <div class="col col-sm-6">
+                    <h3>Settings</h3>
+                    <p>Update your password, height or weight.</p>
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <a href="{{url_for('v_view_last_diagnosis')}}" style="color: black;">
+                <div class="col col-sm-6">
+                    <h3>Your Latest Diagnosis</h3>
+                    <p>From SmartHealth you can easily view all the diagnoses that were made for you.</p>
+                </div>
+            </a>
+            <div class="col col-sm-6">
+                <h3>Your Data/Average Data</h3>
+                <p>
+                    Your Age: {{patient.age}}<br />
+                    Your Height: {{patient.height}}<br />
+                    Your Weight: {{patient.weight}}<br />
+                    Your BMI: {{'%0.2f' %patient.bmi}}<br />
+                </p>
+            </div>
+
+        </div>
+    </div>
+    {% elif current_user.type == "manager" %}
+    <div class=container>
+        <div class="row">
+            <a href="{{url_for('v_add_doctor')}}" style="color: black;">
+                <div class="col col-sm-3">
+                    <h3>Add Doctor</h3>
+                    <p>Add a new doctor to your hospital.</p>
+                </div>
+            </a>
+            <a href="{{url_for('v_activate_doctor')}}" style="color: black;">
+                <div class="col col-sm-3">
+                    <h3>Activate Doctor</h3>
+                    <p>Activate a deactivated doctor account.</p>
+                </div>
+            </a>
+
+            <a href="{{url_for('v_deactivate_doctor')}}" style="color: black;">
+                <div class="col col-sm-3">
+                    <h3>Deactivate Doctor</h3>
+                    <p>Deactivate doctor who no longer works for you.</p>
+                </div>
+            </a>
+
+            <a href="{{url_for('v_settings')}}" style="color: black;">
+                <div class="col col-sm-3">
+                    <h3>Settings</h3>
+                    <p>Update your password.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {%endblock%}

@@ -1,0 +1,140 @@
+{% extends"navbar.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+{% block title %} View Data {% endblock %}
+{%block content%}
+{% if current_user.is_authenticated and current_user.type == "patient"%}
+{% if patient_data.patient_id == current_user.id %}
+<div class="jumbotron text-center">
+    <h1>View Patient Data</h1>
+    <p>You are viewing your data</p>
+</div>
+<div class="container data-container">
+    <div class="row">
+        <div class="col col-lg-6 data-col">
+            <table class="table" id="data" style="display: block;">
+                <thead><h1>General Information</h1></thead>
+                <hr>
+                <tbody>
+                    <tr>
+                        <th>Full Name</th>
+                        <td>{{patient.name}} {{patient.surname}}</td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td>{{patient.age}}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>{{patient.gender}}</td>
+                    </tr>
+                    <tr>
+                        <th>Race</th>
+                        <td>{{patient.race}}</td>
+                    </tr>
+                    <tr>
+                        <th>Height (cm)</th>
+                        <td>{{'%0.2f' %patient.height}}</td>
+                    </tr>
+                    <tr>
+                        <th>Weight (kg)</th>
+                        <td>{{'%0.2f' %patient.weight}}</td>
+                    </tr>
+                    <tr>
+                        <th>BMI (kg/m^2)</th>
+                        <td>{{'%0.2f' %patient.bmi}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col col-lg-6 data-col">
+            <table class="table" id="data" style="display: block;">
+                <thead><h1>Blood Levels</h1></thead>
+                <hr>
+                <tbody>
+                    <tr>
+                        <th>LDL (mg/dL)</th>
+                        <td>{{'%0.2f' %patient_data.ldl}}</td>
+                    </tr>
+                    <tr>
+                        <th>HDL (mg/dL)</th>
+                        <td>{{'%0.2f' %patient_data.hdl}}</td>
+                    </tr>
+                    <tr>
+                        <th>Triglycerides (mg/dL)</th>
+                        <td>{{'%0.2f' %patient_data.triglycerides}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Cholesterol (mg/dL)</th>
+                        <td>{{'%0.2f' %patient_data.total_cholesterol}}</td>
+                    </tr>
+                    <tr>
+                        <th>Hemoglobin (g/dL)</th>
+                        <td>{{'%0.2f' %patient_data.hemoglobin}}</td>
+                    </tr>
+                    <tr>
+                        <th>Sodium (mmol/L)</th>
+                        <td>{{'%0.2f' %patient_data.sodium}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-lg-6 data-col">
+            <table class="table" id="data" style="display: block;">
+                <thead><h1>Vital Readings</h1></thead>
+                <hr>
+                <tbody>
+                    <tr>
+                        <th>Heart Rate (/min)</th>
+                        <td>{{patient_data.heart_rate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Respiratory rate (/min)</th>
+                        <td>{{patient_data.respiratory_rate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Systolic bp (mm[Hg])</th>
+                        <td>{{'%0.2f' %patient_data.systolic_bp}}</td>
+                    </tr>
+                    <tr>
+                        <th>Diastolic bp (mm[Hg])</th>
+                        <td>{{'%0.2f' %patient_data.diastolic_bp}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col col-lg-6 data-col">
+            <table class="table" id="data" style="display: block;">
+                <thead><h1>Miscellaneous</h1></thead>
+                <hr>
+                <tbody>
+                    <tr>
+                        <th>Smoking</th>
+                        <td>{{patient_data.smoking}}</td>
+                    </tr>
+            
+                    <tr>
+                        <th>Pain Severity</th>
+                        <td>{{patient_data.pain_severity}}</td>
+                    </tr>
+                    <tr>
+                        <th>Stress Level</th>
+                        <td>{{patient_data.stress}}</td>
+                    </tr>
+                    <tr>
+                        <th>AI Prediction</th>
+                        {% if prediction.prediction == True %}
+                        <td>Hypertension</td>
+                        {% else %}
+                        <td>Healthy</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endif%}
+{%endif%}
+{%endblock%}

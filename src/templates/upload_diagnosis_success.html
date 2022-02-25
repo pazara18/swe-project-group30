@@ -1,0 +1,18 @@
+{%extends "navbar.html"%}
+{%block title%}Upload Diagnosis{%endblock%}
+{%block content%}
+{% from "includes/_formhelpers.html" import render_field %}
+<div class="jumbotron text-center">
+    <h1>Upload Diagnosis</h1>
+    <p>Enter your diagnosis</p>
+</div>
+<form method="post">
+    <div class="container" style="width: 15%; height:15%; margin:0 auto;">
+    <div class="form-group">
+        {{render_field(form.diagnosis, class_="form-control")}}
+    </div>
+    </div>
+
+    <center><button type="submit" class="btn btn-dark">Submit</button></center>
+</form>
+{%endblock%}

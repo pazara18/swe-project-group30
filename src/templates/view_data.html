@@ -1,0 +1,36 @@
+{% extends"navbar.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+{% block title %} View Data {% endblock %}
+{%block content%}
+{% if current_user.is_authenticated and current_user.type == "patient"%}
+{% if patient.id == current_user.id %}
+<div class="jumbotron text-center">
+    <h1>View Patient Data</h1>
+    <p>You are viewing your data</p>
+</div>
+<table class="table" id="table">
+    <thead>
+        <tr>
+            <th scope="col col-sm-6">Date</th>
+            <th scope="col col-sm-6">Access Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in patient_data %}
+        <tr>
+            <th>{{row.datum.strftime('%Y-%m-%d')}}</th>
+            <td><a class="btn   btn-dark" href="{{url_for('v_view_data_success', data_id=row.id)}}">Access here</a></td>
+        </tr>
+        {% endfor %}
+        {% if not patient_data %}
+        <tr>
+            <div class="alert alert-danger" role="alert" style="margin:20px;">
+               No data available.
+            </div>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endif %}
+{%endif%}
+{%endblock%}

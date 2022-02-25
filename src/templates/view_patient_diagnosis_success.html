@@ -1,0 +1,21 @@
+{% extends"navbar.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+{% block title %} View Diagnosis{% endblock %}
+{%block content%}
+{% if current_user.is_authenticated and current_user.type == "doctor"%}
+{% if patient %}
+<div class="jumbotron text-center">
+    <h1>View Patient Diagnosis</h1>
+    <p>You are viewing {{patient.name}} {{patient.surname}}'s diagnosis</p>
+</div>
+<table class="table" id=data style="display: block;">
+    <tbody>
+        <tr>
+            <th>Diagnosis</th>
+            <td>{{diagnosis.diagnosis}}</td>
+        </tr>
+    </tbody>
+</table>
+{%endif%}
+{%endif%}
+{%endblock%}

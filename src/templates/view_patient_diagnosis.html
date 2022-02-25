@@ -1,0 +1,51 @@
+{% extends"navbar.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+{% block title %} View Data {% endblock %}
+{%block content%}
+{% if current_user.is_authenticated and current_user.type == "doctor"%}
+{% if patient %}
+<div class="jumbotron text-center">
+    <h1>View Patient Diagnosis</h1>
+    <p>You are viewing {{patient.name}} {{patient.surname}}'s diagnosis</p>
+</div>
+<table class="table" id="table">
+    <thead>
+        <tr>
+            <th scope="col col-sm-6">Date</th>
+            <th scope="col col-sm-6">Diagnosis</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in diagnosis %}
+        <tr>
+            <th>{{row.datum.strftime('%Y-%m-%d')}}</th>
+            <td><a href="{{url_for("v_view_patient_diagnosis_success", patient_id=patient.id ,diagnosis_id=row.id)}}">{{row.diagnosis}}</a></td>
+        </tr>
+        {% endfor %}
+        {% if not diagnosis %}
+        <tr>
+            <div class="alert alert-danger" role="alert" style="margin:20px;">
+               No diagnosis available.
+            </div>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% else %}
+<div class="jumbotron text-center">
+    <h1>View Diagnosis</h1>
+    <p>Enter patient's National Id to view diagnosis</p>
+</div>
+{% endif %}
+{% if method == "get" %}
+<form method="post">
+    <div class="container" style="width: 15%; height:15%; margin:0 auto;">
+        <div class="form-group">
+            {{render_field(form.national_id, class_="form-control")}}
+        </div>
+    </div>
+    <center><button type="submit" class="btn btn-dark">Search</button></center>
+</form>
+{% endif %}
+{%endif%}
+{%endblock%}
